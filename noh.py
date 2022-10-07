@@ -16,6 +16,8 @@ class Noh:
     return self._proximo
 
   def setData(self, novo_valor) -> None:
+    if (self._dados[0] == None):
+      self._dados.pop()
     self._dados += [novo_valor]
 
   def setNext(self, novo_proximo) -> None:

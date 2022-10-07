@@ -1,9 +1,11 @@
+from typing import NoReturn
 from noh import *
-from os import system, name
+from os import system, name, _exit
 from time import sleep
 
 
 if __name__ == '__main__':
+  candidatos = Noh(None)
 
   clear = lambda: system('cls' if name == 'nt' else 'clear')
   clear()
@@ -28,4 +30,43 @@ if __name__ == '__main__':
       print('\nComando não reconhecido, digite uns dos comando expecificados!'); sleep(3); clear(); apresentacao()
       return True
 
+  def addCandidato(novoCandidato):
+    candidatos.setData(novoCandidato)
+    print('Candidato cadastrado!')
+
+  def findAll():
+    return candidatos.getData()
+
+  def entradaDado():
+    try:
+      while True:
+        print('\nGerência de Candidatos Aprovados em Concurso Público.')
+        candidato = input('\nInfome o nome do candidato: ').lower().strip()
+        if candidato == 'exit':
+          _exit(0)
+        elif candidato == 'search':
+          ...
+        elif candidato == 'find all':
+          print('\n')
+          print(findAll())
+          ...
+        elif candidato == 'remove first':
+          ...
+        else:
+          addCandidato(candidato)
+
+    except Exception as e:
+      if e:
+        print(e)
+      print('\nComando não reconhecido, digite uns dos comando expecificados!')
+      sleep(3); clear(); entradaDado()
+
+  def main() -> NoReturn :
+    try:
+      if apresentacao():
+        entradaDado()
+    except Exception as e:
+      print(e)
+
+main()
 
