@@ -18,12 +18,12 @@ class Fila:
 
   def first(self):
     if self.isEmpty():
-      raise FilaVazia('A Fila está vazia')
+      raise FilaVazia('\nA Fila está vazia')
     return self.head.getData()
 
   def dequeue(self):
     if self.isEmpty():
-      raise FilaVazia('A Fila está vazia')
+      raise FilaVazia('\nA Fila está vazia')
     
     elementoAtual = self._dados
     proximoElemento = elementoAtual.getNext()
@@ -52,7 +52,7 @@ class Fila:
 
   def girarFila(self, quantidade):
     if self.isEmpty():
-        print('Não há candidatos para girar')
+        print('\nNão há candidatos para girar')
     else:
         cont = 1
         while cont <= quantidade:
@@ -62,7 +62,7 @@ class Fila:
       
   def mostrar(self):
     if self.isEmpty():
-        return 'Não há candidatos para mostrar'
+        return '\nNão há candidatos para mostrar'
     else:
       lista = []
       temp = self._dados

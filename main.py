@@ -35,21 +35,25 @@ if __name__ == '__main__':
       return True
 
   def addCandidato(novoCandidato):
-    #candidatos.setData(novoCandidato)
     candidatos.enqueue(novoCandidato)
-    print('Candidato cadastrado!')
+    print('\nCandidato cadastrado!')
+    sleep(3)
 
   def findAll():
     print(candidatos.mostrar())
+    sleep(3)
   
   def spin(numGiros = 1):
     candidatos.girarFila(numGiros)
+    sleep(3)
     
   def first():
     print(candidatos.first())
+    sleep(3)
     
   def remove():
     candidatos.dequeue()
+    sleep(3)
 
   def entradaDado():
     try:
@@ -63,7 +67,6 @@ if __name__ == '__main__':
         elif candidato == 'all':
           print('\n')
           findAll()
-          ...
         elif candidato == 'remove':
           remove()
         elif 'spin' in candidato:
