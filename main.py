@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
   def apresentacao() -> bool:
     inicializador = input('\nPara iniciar o processo digite "start", para buscar por algum candidato digite "search", para ver o primeiro candidato digite "first",\npara remover o primeiro candidato digite "remove",  para ver todos os candidatos digite "find all", para girar a fila digite "spin"\ne para sair digite "exit": ').lower().strip()
-
+    print('\nGerência de Candidatos Aprovados em Concurso Público.')
     if inicializador == 'start':
       return True
     elif inicializador == 'search':
@@ -56,15 +56,29 @@ if __name__ == '__main__':
     candidatos.dequeue()
     sleep(2)
 
+  def search():
+    lista = []
+    temp = candidatos._dados
+    while (True):
+      lista.append(temp.getData())
+      if (temp.getNext() == None):
+        break
+      temp = temp.getNext()
+    
+    return lista
+
   def entradaDado():
     try:
       while True:
-        print('\nGerência de Candidatos Aprovados em Concurso Público.')
         candidato = input('\nInfome o nome do candidato: ').lower().strip()
         if candidato == 'exit':
           _exit(0)
         elif candidato == 'search':
-          ...
+          nome = input('\nDigite o nome que deseja procurar: ').lower().strip()
+          if nome.capitalize() in search():
+            print(f'\n{nome.capitalize()} existe na lista!')
+          else:
+            print(f'\n{nome.capitalize()} não existe na lista!')
         elif candidato == 'all':
           print('\n')
           findAll()
