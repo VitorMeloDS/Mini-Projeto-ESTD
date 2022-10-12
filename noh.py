@@ -1,30 +1,70 @@
+from fila import Noh
+from noh import *
 
+class FilaVazia(Exception):
+    pass
 
-from typing import Any
+class Fila:
+  def __init__(self, capacidade):
+    self._dados = Noh()
+    self._tamanho = 0
+    self._inicio = 0
 
+  def __len__(self):
+    return self._tamanho
 
-class Noh:
+  def isEmpty(self):
+    return self._tamanho == 0
 
-  def __init__(self,valor_inicial):
-    self._dados = [valor_inicial]
-    self._proximo = [None]
+  def first(self):
+    if self.isEmpty():
+      raise FilaVazia('\nA Fila está vazia')
+    return self._dados.head.getData()
 
-  def getData(self) -> Any:
-    return self._dados
+  def dequeue(self):
+    if self.isEmpty():
+      raise FilaVazia('\nA Fila está vazia')
+    
+    elementoAtual = self._dados.head
+    proximoElemento = self._dados.head.getNext()
+    self._dados.head = proximoElemento
+    
+    self._tamanho -= 1
+    return elementoAtual.getData()
 
-  def getNext(self) -> (Any | None):
-    return self._proximo
+  def enqueue(self, e):
+    temp = self._dados
+    while (True):
+      if (temp.getNext() == None):
+        break
+      temp = self.dados.getNext()
+    self._dados.setData(e)
+    if (self.tamanho == 0):
+      self._dados.head = e
 
-  def setData(self, novo_valor) -> None:
-    if (self._dados[0] == None):
-      self._dados.pop()
-    self._dados += [novo_valor]
+    temp.setNext(e)
+    self._tamanho += 1                        
 
-  def setNext(self, novo_proximo) -> None:
-    if (self._proximo[0] == None):
-      self._proximo.pop()
-    self._proximo += [novo_proximo]
-
-
-
-
+  def girarFila(self, quantidade):
+    if self.isEmpty():
+        print('\nNão há candidatos para girar')
+    else:
+        cont = 1
+        while cont <= quantidade:
+            elementoRemovido = self.dequeue()
+            self.enqueue(elementoRemovido.getData())
+            cont += 1
+      
+  def mostrar(self):
+    if self.isEmpty():
+        return '\nNão há candidatos para mostrar'
+    else:
+      lista = []
+      temp = self._dados
+      while (True):
+        lista.append(temp.getData())
+        if (temp.getNext() == None):
+          break
+        temp = self.dados.getNext()
+      
+      return lista
