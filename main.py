@@ -14,46 +14,47 @@ if __name__ == '__main__':
     if inicializador == 'start':
       return True
     elif inicializador == 'search':
-      print('\nNão há candidatos para procurar!'); sleep(3); clear(); apresentacao()
+      print('\nNão há candidatos para procurar!'); sleep(2); clear(); apresentacao()
       return True
     elif inicializador == 'find all':
-      print('\nNão há candidatos para mostrar!'); sleep(3); clear(); apresentacao()
+      print('\nNão há candidatos para mostrar!'); sleep(2); clear(); apresentacao()
       return True
     elif inicializador == 'remove first':
-      print('\nNão há candidatos para remover!'); sleep(3); clear(); apresentacao()
+      print('\nNão há candidatos para remover!'); sleep(2); clear(); apresentacao()
       return True
     elif inicializador == 'spin':
-      print('\nNão há candidatos para girar!'); sleep(3); clear(); apresentacao()
+      print('\nNão há candidatos para girar!'); sleep(2); clear(); apresentacao()
       return True
     elif inicializador == 'first':
-        print('\nNão há candidatos para mostrar!'); sleep(3); clear(); apresentacao()
+        print('\nNão há candidatos para mostrar!'); sleep(2); clear(); apresentacao()
         return True
     elif inicializador == 'exit':
       return False
     else:
-      print('\nComando não reconhecido, digite uns dos comando expecificados!'); sleep(3); clear(); apresentacao()
+      print('\nComando não reconhecido, digite uns dos comando expecificados!'); sleep(2); clear(); apresentacao()
       return True
 
   def addCandidato(novoCandidato):
     candidatos.enqueue(novoCandidato)
     print('\nCandidato cadastrado!')
-    sleep(3)
+    sleep(2)
 
   def findAll():
     print(candidatos.mostrar())
-    sleep(3)
+    sleep(2)
   
   def spin(numGiros = 1):
     candidatos.girarFila(numGiros)
-    sleep(3)
+    print(candidatos.mostrar())
+    sleep(2)
     
   def first():
     print(candidatos.first())
-    sleep(3)
+    sleep(2)
     
   def remove():
     candidatos.dequeue()
-    sleep(3)
+    sleep(2)
 
   def entradaDado():
     try:
@@ -85,7 +86,7 @@ if __name__ == '__main__':
       if e:
         print(e)
       print('\nComando não reconhecido, digite uns dos comando expecificados!')
-      sleep(3); clear(); entradaDado()
+      sleep(2); clear(); entradaDado()
 
   def main():
     try:
