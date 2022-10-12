@@ -52,13 +52,13 @@ class Fila:
 
   def girarFila(self, quantidade):
     if self.isEmpty():
-        print('\nNão há candidatos para girar')
+      print('\nNão há candidatos para girar')
     else:
-        cont = 1
-        while cont <= quantidade:
-            elementoRemovido = self.dequeue()
-            self.enqueue(elementoRemovido.getData())
-            cont += 1
+      cont = 1
+      while cont <= quantidade:
+        elementoRemovido = self.dequeue()
+        self.enqueue(elementoRemovido.getData())
+        cont += 1
       
   def mostrar(self):
     if self.isEmpty():
