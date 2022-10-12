@@ -1,24 +1,75 @@
-from typing import Any
+from noh import *
 
-class Noh:
+class FilaVazia(Exception):
+    pass
 
-  def __init__(self, valor_inicial = None):
-    self._dados = valor_inicial
-    self._proximo = None
+class Fila:
+  def __init__(self):
+    self._dados = Noh()
+    self._tamanho = 0
+    self._inicio = 0
     self.head = None
 
-  def getData(self) -> Any:
-    return self._dados
+  def __len__(self):
+    return self._tamanho
 
-  def getNext(self) -> (Any | None):
-    return self._proximo
+  def isEmpty(self):
+    return self._tamanho == 0
 
-  def setData(self, novo_valor) -> None:
-    if (self._dados[0] == None):
-      self._dados.pop()
-    self._dados = novo_valor
+  def first(self):
+    if self.isEmpty():
+      raise FilaVazia('A Fila está vazia')
+    return self.head.getData()
 
-  def setNext(self, novo_proximo) -> None:
-    if (self._proximo[0] == None):
-      self._proximo.pop()
-    self._proximo = novo_proximo
+  def dequeue(self):
+    if self.isEmpty():
+      raise FilaVazia('A Fila está vazia')
+    
+    elementoAtual = self._dados
+    proximoElemento = elementoAtual.getNext()
+    self._dados = proximoElemento
+    self.head = proximoElemento
+    
+    self._tamanho -= 1
+    return elementoAtual
+
+  def enqueue(self, e):
+    temp = self._dados
+    while (True):
+      if (self._tamanho == 0):
+        self._dados = Noh(e)
+        self.head = self._dados
+        break
+      else:
+        if (temp.getNext() == None):
+          noh = Noh(e)
+          temp.setNext(noh)
+          break
+        else:
+          temp = temp.getNext()
+
+    self._tamanho += 1                        
+
+  def girarFila(self, quantidade):
+    if self.isEmpty():
+        print('Não há candidatos para girar')
+    else:
+        cont = 1
+        while cont <= quantidade:
+            elementoRemovido = self.dequeue()
+            self.enqueue(elementoRemovido.getData())
+            cont += 1
+      
+  def mostrar(self):
+    if self.isEmpty():
+        return 'Não há candidatos para mostrar'
+    else:
+      lista = []
+      temp = self._dados
+      while (True):
+        lista.append(temp.getData())
+        if (temp.getNext() == None):
+          break
+        temp = temp.getNext()
+      
+      return lista
