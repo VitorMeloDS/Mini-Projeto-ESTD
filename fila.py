@@ -1,7 +1,7 @@
 from noh import *
 
 class FilaVazia(Exception):
-    pass
+  pass
 
 class Fila:
   def __init__(self):
@@ -23,19 +23,19 @@ class Fila:
 
   def dequeue(self):
     if self.isEmpty():
-      raise FilaVazia('\nA Fila está vazia')
-    
-    elementoAtual = self._dados
-    proximoElemento = elementoAtual.getNext()
-    self._dados = proximoElemento
-    self.head = proximoElemento
-    
-    self._tamanho -= 1
-    return elementoAtual
+      print('\nA Fila está vazia')
+    else:
+      elementoAtual = self._dados
+      proximoElemento = elementoAtual.getNext()
+      self._dados = proximoElemento
+      self.head = proximoElemento
+
+      self._tamanho -= 1
+      return elementoAtual
 
   def enqueue(self, e):
     temp = self._dados
-    while (True):
+    while True:
       if (self._tamanho == 0):
         self._dados = Noh(e)
         self.head = self._dados
@@ -54,15 +54,16 @@ class Fila:
     if self.isEmpty():
       print('\nNão há candidatos para girar')
     else:
+      quant = quantidade % self._tamanho
       cont = 1
-      while cont <= quantidade:
+      while cont <= quant:
         elementoRemovido = self.dequeue()
         self.enqueue(elementoRemovido.getData())
         cont += 1
-      
+
   def mostrar(self):
     if self.isEmpty():
-        return '\nNão há candidatos para mostrar'
+      return '\nNão há candidatos para mostrar'
     else:
       lista = []
       temp = self._dados
@@ -71,5 +72,5 @@ class Fila:
         if (temp.getNext() == None):
           break
         temp = temp.getNext()
-      
+
       return lista
