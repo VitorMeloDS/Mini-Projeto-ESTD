@@ -34,19 +34,14 @@ class Fila:
       return elementoAtual
 
   def enqueue(self, e):
-    temp = self._dados
-    while True:
-      if (self._tamanho == 0):
-        self._dados = Noh(e)
-        self.head = self._dados
-        break
-      else:
-        if (temp.getNext() == None):
-          noh = Noh(e)
-          temp.setNext(noh)
-          break
-        else:
-          temp = temp.getNext()
+    if (self._tamanho == 0):
+      self._dados = Noh(e)
+      self.head = self._dados
+      self.final = self._dados
+    else:
+      ultimo = self.final
+      self.final = Noh(e)
+      ultimo.setNext(self.final)
 
     self._tamanho += 1                        
 
