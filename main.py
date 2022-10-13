@@ -2,7 +2,6 @@ from fila import *
 from os import system, name, _exit
 from time import sleep
 
-
 if __name__ == '__main__':
 
   clear = lambda: system('cls' if name == 'nt' else 'clear')
@@ -40,7 +39,7 @@ if __name__ == '__main__':
     sleep(2)
 
   def findAll():
-    print(candidatos.mostrar())
+    print(f'\n{candidatos.mostrar()}')
     sleep(2)
   
   def spin(numGiros = 1):
@@ -55,17 +54,34 @@ if __name__ == '__main__':
   def remove():
     candidatos.dequeue()
     sleep(2)
-
+  
   def search():
     lista = []
     temp = candidatos._dados
     while (True):
-      lista.append(temp.getData())
+      lista.append(temp.getData().lower())
       if (temp.getNext() == None):
         break
       temp = temp.getNext()
     
     return lista
+
+  def validaSearch():
+    nome = input('\nDigite o nome que deseja procurar: ').lower().strip()
+    lista_temp_2 = nome.split()
+    if len(lista_temp_2) > 1:
+      str_temp_2 = ''
+      for j in lista_temp_2:
+        str_temp_2 += f'{j.capitalize()} '
+      if nome in search():
+        print(f'\n{str_temp_2}existe na lista!')
+      else:
+        print(f'\n{str_temp_2}não existe na lista!')
+    else:
+      if nome in search():
+        print(f'\n{nome.capitalize()} existe na lista!')
+      else:
+        print(f'\n{nome.capitalize()} não existe na lista!')  
 
   def entradaDado():
     try:
@@ -74,16 +90,17 @@ if __name__ == '__main__':
         if candidato == 'exit':
           _exit(0)
         elif candidato == 'search':
-          nome = input('\nDigite o nome que deseja procurar: ').lower().strip()
-          if nome.capitalize() in search():
-            print(f'\n{nome.capitalize()} existe na lista!')
+          if candidatos.isEmpty():
+            print('\nNão há candidatos para procurar')
           else:
-            print(f'\n{nome.capitalize()} não existe na lista!')
+            validaSearch()
         elif candidato == 'all':
-          print('\n')
           findAll()
         elif candidato == 'remove':
           remove()
+          if not candidatos.isEmpty():
+            print('\nCandidato removido\n')
+          findAll()
         elif 'spin' in candidato:
             print('\n')
             temp = candidato.split()
@@ -94,7 +111,15 @@ if __name__ == '__main__':
         elif candidato == 'first':
           first()
         else:
-          addCandidato(candidato.capitalize())
+          lista_temp = candidato.split()
+          if len(lista_temp) > 1:
+            str_temp = ''
+            for i in lista_temp:
+              str_temp += f'{i.capitalize()} '
+            candidato = str_temp.strip()
+            addCandidato(candidato)
+          else:
+            addCandidato(candidato.capitalize())
 
     except Exception as e:
       if e:
@@ -110,4 +135,4 @@ if __name__ == '__main__':
       print(e)
 
 candidatos = Fila()
-main()
+main()  
