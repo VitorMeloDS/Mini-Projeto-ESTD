@@ -111,15 +111,18 @@ if __name__ == '__main__':
         elif candidato == 'first':
           first()
         else:
-          lista_temp = candidato.split()
-          if len(lista_temp) > 1:
-            str_temp = ''
-            for i in lista_temp:
-              str_temp += f'{i.capitalize()} '
-            candidato = str_temp.strip()
-            addCandidato(candidato)
+          if len(candidato) > 0:
+            lista_temp = candidato.split()
+            if len(lista_temp) > 1:
+              str_temp = ''
+              for i in lista_temp:
+                str_temp += f'{i.capitalize()} '
+              candidato = str_temp.strip()
+              addCandidato(candidato)
+            else:
+              addCandidato(candidato.capitalize())
           else:
-            addCandidato(candidato.capitalize())
+            print('\nNão pode adicionar vazio')
 
     except Exception as e:
       if e:
